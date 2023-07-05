@@ -36,44 +36,46 @@ const ListCards = ({ updateItem, update, editValue }) => {
         gap={6}
       >
         {taskList &&
-          taskList.map(({ id, title, task }, index) => {
-            return (
-              <GridItem w="100%" key={index}>
-                <Card>
-                  <CardBody>
-                    <Box position={"absolute"} right={2} top={2}>
-                      <IconButton
-                        variant="ghost"
-                        colorScheme="gray"
-                        aria-label="See menu"
-                        borderRadius={50}
-                        icon={<BsThreeDotsVertical />}
-                        color={"twitter.500"}
-                        onClick={() => {
-                          setOpenEdit({
-                            status: !openEdit.status,
-                            id: index,
-                          });
-                        }}
-                      />
-                    </Box>
-                    {openEdit.status && index === openEdit.id && (
-                      <ThreeDotsEdit
-                        editValue={editValue}
-                        edit={setOpenEdit}
-                        id={id}
-                        updateItem={updateItem}
-                        update={update}
-                      />
-                    )}
-                    <Text fontSize={20} fontWeight={600}>
-                      {title}
-                    </Text>
-                    <Text>{task}</Text>
-                  </CardBody>
-                </Card>
-              </GridItem>
-            );
+          taskList.map(({ id, title, task, username }, index) => {
+            if (username === JSON.parse(localStorage.getItem("name"))) {
+              return (
+                <GridItem w="100%" key={index}>
+                  <Card>
+                    <CardBody>
+                      <Box position={"absolute"} right={2} top={2}>
+                        <IconButton
+                          variant="ghost"
+                          colorScheme="gray"
+                          aria-label="See menu"
+                          borderRadius={50}
+                          icon={<BsThreeDotsVertical />}
+                          color={"twitter.500"}
+                          onClick={() => {
+                            setOpenEdit({
+                              status: !openEdit.status,
+                              id: index,
+                            });
+                          }}
+                        />
+                      </Box>
+                      {openEdit.status && index === openEdit.id && (
+                        <ThreeDotsEdit
+                          editValue={editValue}
+                          edit={setOpenEdit}
+                          id={id}
+                          updateItem={updateItem}
+                          update={update}
+                        />
+                      )}
+                      <Text fontSize={20} fontWeight={600}>
+                        {title}
+                      </Text>
+                      <Text>{task}</Text>
+                    </CardBody>
+                  </Card>
+                </GridItem>
+              );
+            }
           })}
       </Grid>
     </Stack>

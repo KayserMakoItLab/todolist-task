@@ -20,6 +20,7 @@ const CreateCard = ({ updateRender, updateItem, editValue, edit }) => {
   const payload = {
     title: title,
     task: task,
+    username: JSON.parse(localStorage.getItem("name")),
   };
 
   const getEditItem = async () => {

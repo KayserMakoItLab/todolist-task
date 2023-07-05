@@ -5,23 +5,24 @@ const supabase = createClient(
   process.env.REACT_APP_SUPABASE_KEY
 );
 
-const createItem = async ({ title, task }) => {
-    try{
-        const { data } = await supabase
-          .from("todoDB")
-          .insert([{ title: title, task: task }])
-          .select();
-        return data;
-    } catch(err){
-        return err;
-    }
+const createItem = async ({ title, task, username }) => {
+  try {
+    const { data } = await supabase
+      .from("todoDB")
+      .insert([{ title: title, task: task, username: username }])
+      .select();
+    return data;
+  } catch (err) {
+    return err;
+  }
 };
 
 const listItems = async() => {
     try{
         let { data: todoDB } = await supabase
             .from('todoDB')
-            .select('id,title,task')
+            .select('id,title,task,username')
+
         return todoDB;
     } catch(err){
         return err
