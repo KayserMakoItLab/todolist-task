@@ -25,22 +25,27 @@ const ListCards = ({ updateItem, update, editValue }) => {
     getData();
   }, [updateItem]);
   return (
-    <Stack padding={"2rem"}>
+    <Stack
+      padding={"2rem"}
+      alignItems={window.innerWidth < 480 ? "center" : ""}
+    >
       <Grid
         templateColumns={[
+          "repeat(1, 1fr)",
           "repeat(2, 1fr)",
           "repeat(3, 1fr)",
           "repeat(4, 1fr)",
           "repeat(5, 1fr)",
         ]}
         gap={6}
+        flexWrap={"wrap"}
       >
         {taskList &&
           taskList.map(({ id, title, task, username }, index) => {
             if (username === JSON.parse(localStorage.getItem("name"))) {
               return (
                 <GridItem w="100%" key={index}>
-                  <Card>
+                  <Card maxW={"15rem"}>
                     <CardBody>
                       <Box position={"absolute"} right={2} top={2}>
                         <IconButton
