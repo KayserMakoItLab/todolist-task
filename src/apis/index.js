@@ -88,8 +88,9 @@ const checkUser = async(username, password) => {
           .select("*")
           .eq("username", username)
           .eq("password", password)
-        if(error) return error
-    localStorage.setItem("name", JSON.stringify(authDB[0].username));
+        if (authDB.length > 0){
+          localStorage.setItem("name", JSON.stringify(authDB[0].username));
+        }
     return authDB
     } catch(err){
         return err

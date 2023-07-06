@@ -30,12 +30,13 @@ const Login = () => {
   const handleSubmit = async () => {
     if (username && password) {
       const data = await checkUser(username, password);
-      if (data.length !== 0) {
+      if (data && data.length !== 0) {
         setTimeout(() => {
           navigate("/");
         }, 3000);
         sendNotification("success", "Successfully Logged In!");
       } else {
+        console.log("here");
         sendNotification("error", "Invalid Username or Password!");
       }
     } else {
